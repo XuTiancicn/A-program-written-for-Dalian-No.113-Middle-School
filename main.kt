@@ -1,7 +1,6 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -28,7 +27,11 @@ fun main() {
         button.addActionListener {
             try {
                 val file = File("main.jar") // 假设main.jar在当前目录
-                val destFile = File("C:/main.jar") // 目标路径
+                val destDir = File("C:/Program Files/A-program-written-for-Dalian-No.113-Middle-School") // 目标路径
+                if (!destDir.exists()) {
+                    destDir.mkdirs() // 如果不存在，则创建目录
+                }
+                val destFile = File(destDir, "main.jar") // 目标文件
                 file.copyTo(destFile) // 复制文件
                 JOptionPane.showMessageDialog(frame, "复制成功") // 提示复制成功
             } catch (e: IOException) {
