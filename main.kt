@@ -1,6 +1,9 @@
-import javax.swing.JButton
-import javax.swing.JFrame
-import javax.swing.JOptionPane
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import java.io.File;
+import java.io.IOException;
 
 fun getCurrentSystem(): String {
     val osName = System.getProperty("os.name")
@@ -18,12 +21,19 @@ fun main() {
         frame.setSize(300, 300)
 
         // 创建一个按钮
-        val button = JButton("开始执行")
+        val button = JButton("开始复制")
         frame.add(button)
 
         // 为按钮添加点击事件
         button.addActionListener {
-            JOptionPane.showMessageDialog(frame, "执行完毕")
+            try {
+                val file = File("main.jar") // 假设main.jar在当前目录
+                val destFile = File("C:/main.jar") // 目标路径
+                file.copyTo(destFile) // 复制文件
+                JOptionPane.showMessageDialog(frame, "复制成功") // 提示复制成功
+            } catch (e: IOException) {
+                JOptionPane.showMessageDialog(frame, "复制失败：" + e.message) // 提示复制失败
+            }
         }
 
         frame.setVisible(true)
