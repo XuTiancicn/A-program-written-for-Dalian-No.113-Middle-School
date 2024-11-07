@@ -1,46 +1,51 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import java.io.File;
-import java.io.IOException;
-
-fun getCurrentSystem(): String {
-    val osName = System.getProperty("os.name")
-    return when {
-        osName.startsWith("Windows") -> "Windows"
-        else -> "除 Windows 外其他系统不可用"
-    }
-}
+import java.lang.management.ManagementFactory
+import java.lang.management.OperatingSystemMXBean
+import javax.swing.*
+import java.awt.Dimension
+import java.awt.Font
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import javax.swing.JButton
+import javax.swing.JFrame
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
 
 fun main() {
-    val os = getCurrentSystem()
-    if (os == "Windows") {
-        // 创建一个空白窗口
-        val frame = JFrame()
-        frame.setSize(300, 300)
+    // 获取当前系统
+    val os = ManagementFactory.getOperatingSystemMXBean()
+    println("系统名称: ${os.name}")
 
-        // 创建一个按钮
-        val button = JButton("开始复制")
-        frame.add(button)
-
-        // 为按钮添加点击事件
-        button.addActionListener {
-            try {
-                val file = File("main.jar") // 假设main.jar在当前目录
-                val destDir = File("C:/Program Files/A-program-written-for-Dalian-No.113-Middle-School") // 目标路径
-                if (!destDir.exists()) {
-                    destDir.mkdirs() // 如果不存在，则创建目录
-                }
-                val destFile = File(destDir, "main.jar") // 目标文件
-                file.copyTo(destFile) // 复制文件
-                JOptionPane.showMessageDialog(frame, "复制成功") // 提示复制成功
-            } catch (e: IOException) {
-                JOptionPane.showMessageDialog(frame, "复制失败：" + e.message) // 提示复制失败
-            }
-        }
-
-        frame.setVisible(true)
+    // 判断操作系统是否为 Windows
+    if (os.name.equals("Windows")) {
+        // 在非 Windows 环境下，输出提示并退出程序
+        println("NO")
+        println("非 Windows 环境")
+        println("按回车后关闭程序")
+        System.`in`.read() // 等待用户按下回车键
+        System.exit(0) // 退出程序
     } else {
-        println("$os")
+        // 在 Windows 环境下，执行某些代码
+        println("OK")   
     }
+    val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
+    frame.setSize(550, 550)
+    frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    // 设置按钮的大小
+    val button = JButton("GO")
+    button.preferredSize = Dimension(150, 50)
+    // 设置按钮的字体和大小
+    button.font = Font("Arial", Font.BOLD, 16)
+    val panel = frame.contentPane
+    panel.layout = GridBagLayout()
+    val c = GridBagConstraints()
+    c.gridx = 0
+    c.gridy = 0
+    panel.add(button, c)
+    frame.contentPane.add(button)
+    frame.pack()
+    frame.setLocationRelativeTo(null)
+    frame.setSize(550, 550)
+    frame.isVisible = true
 }
+
+
