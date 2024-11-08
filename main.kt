@@ -20,16 +20,20 @@ fun main() {
     println("系统名称: ${os.name}")
 
     //判断操作系统是否为 Windows
-    if (os.name.equals("Windows")) {
-        //在非 Windows 环境下，输出提示并退出程序
-        println("NO")
-        println("非 Windows 环境")
-        println("按回车后关闭程序")
-        System.`in`.read() //等待用户按下回车键
-        System.exit(0) //退出程序
-    } else {
+    if (os.name.equals("Windows 10")) {
         //在 Windows 环境下，执行某些代码
-        println("OK,GO")   
+        println("OK,GO(Windows 10)")   
+    } else {
+        if (os.name.equals("Windows 11")) {
+            println("OK,GO(Windows 11)")
+            } else {
+                //在非 Windows 环境下，输出提示并退出程序
+                println("NO")
+                println("非 Windows 环境")
+                println("按回车后关闭程序")
+                System.`in`.read() //等待用户按下回车键
+                System.exit(0) //退出程序
+            }
     }
     val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
     frame.setSize(550, 550)
@@ -53,22 +57,23 @@ fun main() {
     //按钮点击操作
      button.addActionListener(object : ActionListener {
         override fun actionPerformed(e: ActionEvent?) {
-            val sourceFile = File("main.jar") // 程序执行目录下的main.jar
-    val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School") // 目标文件夹
-
-    // 如果目标文件夹不存在，则创建
-    if (!targetDir.exists()) {
-        targetDir.mkdirs()
-    }
-
-    // 复制文件
-    try {
-        val targetFile = File(targetDir, sourceFile.name)
-        Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
-        JOptionPane.showMessageDialog(null,"安装成功!")
-    } catch (e: Exception) {
-       JOptionPane.showMessageDialog(null,"安装失败：${e.message}")
-    }
-        }            
+            val sourceDir = File(".") // 当前目录
+            val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
+            
+            // 如果目标文件夹不存在，则创建
+            if (!targetDir.exists()) {
+                targetDir.mkdirs()
+                }
+                
+                sourceDir.listFiles()?.filter { it.extension == "jar" }?.forEach {
+                val targetFile = File(targetDir, it.name)
+                try {
+                    Files.copy(it.toPath(), targetFile.toPath())
+                    JOptionPane.showMessageDialog(null,"安装成功!")
+                    } catch (e: Exception) {
+                    JOptionPane.showMessageDialog(null,"安装失败：${e.message}")
+                }
+            }
+        }
     })
 }
