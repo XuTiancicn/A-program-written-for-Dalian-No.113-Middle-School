@@ -23,22 +23,26 @@ fun main(args: Array<String>) {
     println("系统名称: ${os.name}")
 
     //判断操作系统是否为 Windows
-    if (os.name.equals("Windows 10")) {
+    if (os.name.equals("Windows 7")) {
         //在 Windows 环境下，执行某些代码
-        println("OK,GO(Windows 10)")   
+        println("OK,GO(Windows 7)")   
     } else {
-        if (os.name.equals("Windows 11")) {
-            println("OK,GO(Windows 11)")
+        if (os.name.equals("Windows 10")) {
+            println("OK,GO(Windows 10)")
             } else {
-                //在非 Windows 环境下，输出提示并退出程序
-                println("NO")
-                println("非 Windows 环境")
-                println("按回车后关闭程序")
-                System.`in`.read() //等待用户按下回车键
-                System.exit(0) //退出程序
+                if (os.name.equals("Windows 11")) {
+                    println("OK,GO(Windows 11)")
+                    } else {
+                        //在非 Windows 环境下，输出提示并退出程序
+                        println("NO")
+                        println("非 Windows 环境")
+                        println("按回车后关闭程序")
+                        System.`in`.read() //等待用户按下回车键
+                        System.exit(0) //退出程序
+                    }
             }
     }
-     // 检查是否有 -go 参数
+    // 检查是否有 -go 参数
     if (args.contains("-go")) {
         // 有 -go 参数
         println("请添加 -go 参数")
@@ -47,7 +51,7 @@ fun main(args: Array<String>) {
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         //设置按钮的大小
         val button = JButton("请添加 -go 参数")
-        button.preferredSize = Dimension(150, 50)
+        button.preferredSize = Dimension(200, 50)
         //设置按钮的字体和大小
         button.font = Font("微软雅黑", Font.BOLD, 16)
         val panel = frame.contentPane
@@ -65,11 +69,16 @@ fun main(args: Array<String>) {
             val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
             frame.setSize(550, 550)
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-            //设置按钮的大小
+            //设置1按钮的大小
             val button = JButton("开始安装")
             button.preferredSize = Dimension(150, 50)
-            //设置按钮的字体和大小
+            //设置1按钮的字体和大小
             button.font = Font("微软雅黑", Font.BOLD, 16)
+            //设置2按钮的大小
+            val button2 = JButton("检查更新")
+            button2.preferredSize = Dimension(150, 50)
+            //设置2按钮的字体和大小
+            button2.font = Font("微软雅黑", Font.BOLD, 16)
             val panel = frame.contentPane
             panel.layout = GridBagLayout()
             val c = GridBagConstraints()
@@ -77,21 +86,21 @@ fun main(args: Array<String>) {
             c.gridy = 0
             panel.add(button, c)
             frame.contentPane.add(button)
+            panel.add(button2, c)
+            frame.contentPane.add(button2)
             frame.pack()
             frame.setLocationRelativeTo(null)
             frame.setSize(550, 550)
             frame.isVisible = true
-            //按钮点击操作
+            //按钮1点击操作
             button.addActionListener(object : ActionListener {
                 override fun actionPerformed(e: ActionEvent?) {
                     val sourceDir = File(".") // 当前目录
                     val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
-                    
                     // 如果目标文件夹不存在，则创建
                     if (!targetDir.exists()) {
                         targetDir.mkdirs()
                     }
-                    
                     sourceDir.listFiles()?.filter { it.extension == "jar" }?.forEach {
                         val targetFile = File(targetDir, it.name)
                         try {
@@ -103,5 +112,11 @@ fun main(args: Array<String>) {
                 }
             }
         })
-    }
+        //按钮2点击操作
+        button2.addActionListener(object : ActionListener {
+            override fun actionPerformed(e: ActionEvent?) {
+                JOptionPane.showMessageDialog(null,"没写完，点了也没用!")
+            }
+        })
+    }        
 }
