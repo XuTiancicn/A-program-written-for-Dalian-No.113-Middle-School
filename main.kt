@@ -53,7 +53,7 @@ fun main(args: Array<String>) {
         val button = JButton("请添加 -go 参数")
         button.preferredSize = Dimension(200, 50)
         //设置按钮的字体和大小
-        button.font = Font("微软雅黑", Font.BOLD, 16)
+        button.font = Font("MiSans", Font.BOLD, 20)
         val panel = frame.contentPane
         panel.layout = GridBagLayout()
         val c = GridBagConstraints()
@@ -73,12 +73,12 @@ fun main(args: Array<String>) {
             val button = JButton("开始安装")
             button.preferredSize = Dimension(150, 50)
             //设置1按钮的字体和大小
-            button.font = Font("微软雅黑", Font.BOLD, 16)
+            button.font = Font("MiSans", Font.BOLD, 20)
             //设置2按钮的大小
             val button2 = JButton("检查更新")
             button2.preferredSize = Dimension(150, 50)
             //设置2按钮的字体和大小
-            button2.font = Font("微软雅黑", Font.BOLD, 16)
+            button2.font = Font("MiSans", Font.BOLD, 20)
             val panel = frame.contentPane
             panel.layout = GridBagLayout()
             val c = GridBagConstraints()
@@ -107,7 +107,7 @@ fun main(args: Array<String>) {
                         Files.copy(it.toPath(), targetFile.toPath())
                         JOptionPane.showMessageDialog(null,"安装成功!")
                         } catch (e: Exception) {
-                        JOptionPane.showMessageDialog(null,"安装失败：${e.message}")
+                        JOptionPane.showMessageDialog(null,"安装失败：${e.message}");
                     }
                 }
             }
