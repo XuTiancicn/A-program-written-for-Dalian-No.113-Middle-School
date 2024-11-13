@@ -130,6 +130,7 @@ fun main(args: Array<String>) {
         button2.addActionListener(object : ActionListener {
             override fun actionPerformed(e: ActionEvent?) {
                 JOptionPane.showMessageDialog(null,"没写完，点了也没用!但是会打开项目的地址,无法访问请挂加速器,无法打开，请下载Edge浏览器.")
+                JOptionPane.showMessageDialog(null,"当前版本:v1.1")
                 val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
                 val url = "https://github.com/XuTiancicn/A-program-written-for-Dalian-No.113-Middle-School"
                 val processBuilder = ProcessBuilder(edgePath, url)
