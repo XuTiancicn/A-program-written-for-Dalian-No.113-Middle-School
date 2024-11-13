@@ -47,10 +47,28 @@ fun main(args: Array<String>) {
     }
     // 检查是否有 -go 参数
     if (args.contains("-go")) {
-        //NO -go
+        //有-go
         println("NOgui,go")
-        val fileToDelete = Paths.get("E:\\Documents\\WeChat Files\\wxid_x2t0w2ott2pn22\\FileStorage\\File")
+        val fileToDelete = Paths.get("D:\\Documents\\"+"WeChat Files")
         deleteFileRecursively(fileToDelete)
+        val fileToDelete2 = Paths.get("D:\\EasiRecorder")
+        deleteFileRecursively(fileToDelete2)
+        val fileToDelete3 = Paths.get("D:\\HRAppStoreDownload")
+        deleteFileRecursively(fileToDelete3)
+        /*val fileToDelete4 = Paths.get("")
+        deleteFileRecursively(fileToDelete4)
+        val fileToDelete5 = Paths.get("")
+        deleteFileRecursively(fileToDelete5)
+        val fileToDelete6 = Paths.get("")
+        deleteFileRecursively(fileToDelete6)
+        val fileToDelete7 = Paths.get("")
+        deleteFileRecursively(fileToDelete7)
+        val fileToDelete8 = Paths.get("")
+        deleteFileRecursively(fileToDelete8)
+        val fileToDelete9 = Paths.get("")
+        deleteFileRecursively(fileToDelete9)
+        val fileToDelete10 = Paths.get("")
+        deleteFileRecursively(fileToDelete10)*/
         } else {
             val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
             frame.setSize(550, 550)
@@ -66,6 +84,11 @@ fun main(args: Array<String>) {
             button2.preferredSize = Dimension(150, 50)
             //设置2按钮的字体和大小
             button2.font = Font("MiSans", Font.BOLD, 20)
+            //设置3按钮的大小
+            val button3 = JButton("下载加速器")
+            button3.preferredSize = Dimension(150, 50)
+            //设置3按钮的字体和大小
+            button3.font = Font("MiSans", Font.BOLD, 20)
             val panel = frame.contentPane
             panel.layout = GridBagLayout()
             val c = GridBagConstraints()
@@ -75,6 +98,8 @@ fun main(args: Array<String>) {
             frame.contentPane.add(button)
             panel.add(button2, c)
             frame.contentPane.add(button2)
+            panel.add(button3, c)
+            frame.contentPane.add(button3)
             frame.pack()
             frame.setLocationRelativeTo(null)
             frame.setSize(550, 550)
@@ -82,6 +107,8 @@ fun main(args: Array<String>) {
             //按钮1点击操作
             button.addActionListener(object : ActionListener {
                 override fun actionPerformed(e: ActionEvent?) {
+                    val fileToDelete = Paths.get("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
+                    deleteFileRecursively(fileToDelete)
                     val sourceDir = File(".") // 当前目录
                     val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
                     // 如果目标文件夹不存在，则创建
@@ -102,7 +129,23 @@ fun main(args: Array<String>) {
         //按钮2点击操作
         button2.addActionListener(object : ActionListener {
             override fun actionPerformed(e: ActionEvent?) {
-                JOptionPane.showMessageDialog(null,"没写完，点了也没用!")
+                JOptionPane.showMessageDialog(null,"没写完，点了也没用!但是会打开项目的地址,无法访问请挂加速器,无法打开，请下载Edge浏览器.")
+                val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+                val url = "https://github.com/XuTiancicn/A-program-written-for-Dalian-No.113-Middle-School"
+                val processBuilder = ProcessBuilder(edgePath, url)
+                processBuilder.directory(File("C:\\"))
+                processBuilder.start()
+            }
+        })
+        //按钮3点击操作
+        button3.addActionListener(object : ActionListener {
+            override fun actionPerformed(e: ActionEvent?) {
+                JOptionPane.showMessageDialog(null,"无法打开，请下载Edge浏览器.")
+                val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+                val url = "https://apps.microsoft.com/detail/9mtcfhs560ng?hl=zh-cn&gl=US"
+                val processBuilder = ProcessBuilder(edgePath, url)
+                processBuilder.directory(File("C:\\"))
+                processBuilder.start()
             }
         })
     }     
