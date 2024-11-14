@@ -26,38 +26,33 @@ fun main(args: Array<String>) {
     println("系统名称: ${os.name}")
 
     //判断操作系统是否为 Windows
-    if (os.name.equals("Windows 7")) {
-        //在 Windows 环境下，执行某些代码
-        println("OK,GO(Windows 7)")   
-    } else {
-        if (os.name.equals("Windows 10")) {
-            println("OK,GO(Windows 10)")
-            } else {
-                if (os.name.equals("Windows 11")) {
-                    println("OK,GO(Windows 11)")
-                    } else {
-                        //在非 Windows 环境下，输出提示并退出程序
-                        println("NO")
-                        println("非 Windows 环境")
-                        println("按回车后关闭程序")
-                        System.`in`.read() //等待用户按下回车键
-                        System.exit(0) //退出程序
-                    }
-            }
+    if (os.name.equals("Windows 10")) {
+        println("OK,GO(Windows 10)")
+        } else {
+            if (os.name.equals("Windows 11")) {
+                println("OK,GO(Windows 11)")
+                } else {
+                    //在非 Windows 环境下，输出提示并退出程序
+                    println("NO")
+                    println("非 Windows 10/Windows 11 环境")
+                    println("按回车后关闭程序")
+                    System.`in`.read() //等待用户按下回车键
+                    System.exit(0) //退出程序
+                }
     }
     // 检查是否有 -go 参数
     if (args.contains("-go")) {
         //有-go
         println("NOgui,go")
-        val fileToDelete = Paths.get("D:\\Documents\\"+"WeChat Files")
+        val fileToDelete = Paths.get("D:\\Documents\\WeChat Files")
         deleteFileRecursively(fileToDelete)
         val fileToDelete2 = Paths.get("D:\\EasiRecorder")
         deleteFileRecursively(fileToDelete2)
         val fileToDelete3 = Paths.get("D:\\HRAppStoreDownload")
         deleteFileRecursively(fileToDelete3)
-        /*val fileToDelete4 = Paths.get("")
+        val fileToDelete4 = Paths.get("E:\\Documents\\Teaching Assistant\\File Library")
         deleteFileRecursively(fileToDelete4)
-        val fileToDelete5 = Paths.get("")
+        /*val fileToDelete5 = Paths.get("")
         deleteFileRecursively(fileToDelete5)
         val fileToDelete6 = Paths.get("")
         deleteFileRecursively(fileToDelete6)
@@ -84,11 +79,6 @@ fun main(args: Array<String>) {
             button2.preferredSize = Dimension(150, 50)
             //设置2按钮的字体和大小
             button2.font = Font("MiSans", Font.BOLD, 20)
-            //设置3按钮的大小
-            val button3 = JButton("下载加速器")
-            button3.preferredSize = Dimension(150, 50)
-            //设置3按钮的字体和大小
-            button3.font = Font("MiSans", Font.BOLD, 20)
             val panel = frame.contentPane
             panel.layout = GridBagLayout()
             val c = GridBagConstraints()
@@ -98,8 +88,6 @@ fun main(args: Array<String>) {
             frame.contentPane.add(button)
             panel.add(button2, c)
             frame.contentPane.add(button2)
-            panel.add(button3, c)
-            frame.contentPane.add(button3)
             frame.pack()
             frame.setLocationRelativeTo(null)
             frame.setSize(550, 550)
@@ -138,20 +126,8 @@ fun main(args: Array<String>) {
                 processBuilder.start()
             }
         })
-        //按钮3点击操作
-        button3.addActionListener(object : ActionListener {
-            override fun actionPerformed(e: ActionEvent?) {
-                JOptionPane.showMessageDialog(null,"无法打开，请下载Edge浏览器.")
-                val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
-                val url = "https://apps.microsoft.com/detail/9mtcfhs560ng?hl=zh-cn&gl=US"
-                val processBuilder = ProcessBuilder(edgePath, url)
-                processBuilder.directory(File("C:\\"))
-                processBuilder.start()
-            }
-        })
-    }     
+    }
 }
-
  private fun deleteFileRecursively(file: Path) {
     if (Files.isDirectory(file)) {
         Files.list(file).forEach { child ->
