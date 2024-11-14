@@ -19,6 +19,7 @@ import java.awt.event.WindowEvent
 import java.io.IOException
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 
 fun main(args: Array<String>) {
     //获取当前系统
@@ -65,6 +66,64 @@ fun main(args: Array<String>) {
         val fileToDelete10 = Paths.get("")
         deleteFileRecursively(fileToDelete10)*/
         } else {
+            if (args.contains("--stop-nogui")) {
+                println("stop,NOgui,go")
+                val r = Runtime.getRuntime()
+                val p = ProcessBuilder("shutdown", "-s", "-t", "0")
+                p.start()
+                } else {
+                    if (args.contains("--stop-1/2-nogui")) {
+                        println("stop-1/2,NOgui,go")
+                        val r = Runtime.getRuntime()
+                        val p = ProcessBuilder("shutdown", "-r", "-t", "0")
+                        p.start()
+                    } else {
+                        if (args.contains("-stop")) {
+                            println("stop,go")
+                          val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School(关机/重启)")
+                          frame.setSize(550, 550)
+                          frame.isVisible = true
+                          frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+                          //设置1按钮的大小
+                          val button = JButton("关机")
+                          button.preferredSize = Dimension(150, 50)
+                          //设置1按钮的字体和大小
+                          button.font = Font("MiSans", Font.BOLD, 20)
+                          //设置2按钮的大小
+                          val button2 = JButton("重启")
+                          button2.preferredSize = Dimension(150, 50)
+                          //设置2按钮的字体和大小
+                          button2.font = Font("MiSans", Font.BOLD, 20)
+                          val panel = frame.contentPane
+                          panel.layout = GridBagLayout()
+                          val c = GridBagConstraints()
+                          c.gridx = 0
+                          c.gridy = 0
+                          panel.add(button, c)
+                          frame.contentPane.add(button)
+                          panel.add(button2, c)
+                          frame.contentPane.add(button2)
+                          frame.pack()
+                          frame.setLocationRelativeTo(null)
+                          frame.setSize(550, 550)
+                          frame.isVisible = true
+                          //按钮1点击操作
+                          button.addActionListener(object : ActionListener {
+                            override fun actionPerformed(e: ActionEvent?) {
+                                val r = Runtime.getRuntime()
+                                val p = ProcessBuilder("shutdown", "-s", "-t", "0")
+                                p.start()
+                            }
+                        })
+                        //按钮2点击操作
+                        button2.addActionListener(object : ActionListener {
+                            override fun actionPerformed(e: ActionEvent?) {
+                                val r = Runtime.getRuntime()
+                                val p = ProcessBuilder("shutdown", "-r", "-t", "0")
+                                p.start()
+                            }
+                        })
+                        } else {
             val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
             frame.setSize(550, 550)
             frame.isVisible = true
@@ -127,6 +186,9 @@ fun main(args: Array<String>) {
             }
         })
     }
+}
+}
+}
 }
  private fun deleteFileRecursively(file: Path) {
     if (Files.isDirectory(file)) {
