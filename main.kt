@@ -65,10 +65,10 @@ fun main(args: Array<String>) {
         deleteFileRecursively(fileToDelete9)
         val fileToDelete10 = Paths.get("")
         deleteFileRecursively(fileToDelete10)*/
-        } else {
-            if (args.contains("-stop")) {
-                println("stop,go")
-                while (true) {
+        println("stop,go")
+        Thread.sleep(60000) // 暂停1分钟
+        println("ok")
+        while (true) {
         val currentTime = Calendar.getInstance().apply {
             time = Date()
         }
@@ -78,99 +78,98 @@ fun main(args: Array<String>) {
 
         if (hour == 12 && minute == 50) {
             restartSystem()
-        } else if (hour == 16 && minute == 50) {
-            shutdownSystem()
         } else if (hour == 15 && minute == 20) {
             restartSystem()
+        } else if (hour == 17 && minute == 50) {
+            shutdownSystem()
+        } else if (hour >= 18) {
+            shutdownSystem()
         }
 
-        Thread.sleep(30000) // 暂停1分钟
+        Thread.sleep(100)
     }
-                        } else {
-                            val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
-                            frame.setSize(550, 550)
-                            frame.isVisible = true
-                            frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-                            //设置1按钮的大小
-                            val button = JButton("开始安装")
-                            button.preferredSize = Dimension(150, 50)
-                            //设置1按钮的字体和大小
-                            button.font = Font("MiSans", Font.BOLD, 20)
-                            //设置2按钮的大小
-                            val button2 = JButton("检查更新")
-                            button2.preferredSize = Dimension(150, 50)
-                            //设置2按钮的字体和大小
-                            button2.font = Font("MiSans", Font.BOLD, 20)
-                            val panel = frame.contentPane
-                            panel.layout = GridBagLayout()
-                            val c = GridBagConstraints()
-                            c.gridx = 0
-                            c.gridy = 0
-                            panel.add(button, c)
-                            frame.contentPane.add(button)
-                            panel.add(button2, c)
-                            frame.contentPane.add(button2)
-                            frame.pack()
-                            frame.setLocationRelativeTo(null)
-                            frame.setSize(550, 550)
-                            frame.isVisible = true
-                            //按钮1点击操作
-                            button.addActionListener(object : ActionListener {
-                                override fun actionPerformed(e: ActionEvent?) {
-                                    val fileToDelete = Paths.get("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
-                                    deleteFileRecursively(fileToDelete)
-                                    val sourceDir = File(".") // 当前目录
-                                    val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
-                                    // 如果目标文件夹不存在，则创建
-                                    if (!targetDir.exists()) {
-                                        targetDir.mkdirs()
-                                        }
-                                        sourceDir.listFiles()?.filter { it.extension == "jar" }?.forEach {
-                                            val targetFile = File(targetDir, it.name)
-                                            try {
-                                                Files.copy(it.toPath(), targetFile.toPath())
-                                                JOptionPane.showMessageDialog(null,"安装成功!")
-                                                } catch (e: Exception) {
-                                                    JOptionPane.showMessageDialog(null,"安装失败：${e.message}");
-                                                }
-                                            }
-                                        }
-                                    })
-                                    //按钮2点击操作
-                                    button2.addActionListener(object : ActionListener {
-                                        override fun actionPerformed(e: ActionEvent?) {
-                                            JOptionPane.showMessageDialog(null,"没写完，点了也没用!但是会打开项目的地址,无法访问请挂加速器,无法打开，请下载Edge浏览器.")
-                                            JOptionPane.showMessageDialog(null,"当前版本:v1.1")
-                                            val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
-                                            val url = "https://github.com/XuTiancicn/A-program-written-for-Dalian-No.113-Middle-School"
-                                            val processBuilder = ProcessBuilder(edgePath, url)
-                                            processBuilder.directory(File("C:\\"))
-                                            processBuilder.start()
-                                        }
-                                    })
+    } else {
+        val frame = JFrame("A-program-written-for-Dalian-No.113-Middle-School")
+        frame.setSize(550, 550)
+        frame.isVisible = true
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        //设置1按钮的大小
+        val button = JButton("开始安装")
+        button.preferredSize = Dimension(150, 50)
+        //设置1按钮的字体和大小
+        button.font = Font("MiSans", Font.BOLD, 20)
+        //设置2按钮的大小
+        val button2 = JButton("检查更新")
+        button2.preferredSize = Dimension(150, 50)
+        //设置2按钮的字体和大小
+        button2.font = Font("MiSans", Font.BOLD, 20)
+        val panel = frame.contentPane
+        panel.layout = GridBagLayout()
+        val c = GridBagConstraints()
+        c.gridx = 0
+        c.gridy = 0
+        panel.add(button, c)
+        frame.contentPane.add(button)
+        panel.add(button2, c)
+        frame.contentPane.add(button2)
+        frame.pack()
+        frame.setLocationRelativeTo(null)
+        frame.setSize(550, 550)
+        frame.isVisible = true
+        //按钮1点击操作
+        button.addActionListener(object : ActionListener {
+            override fun actionPerformed(e: ActionEvent?) {
+                val fileToDelete = Paths.get("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
+                deleteFileRecursively(fileToDelete)
+                val sourceDir = File(".") // 当前目录
+                val targetDir = File("C:\\Program Files\\A-program-written-for-Dalian-No.113-Middle-School")
+                // 如果目标文件夹不存在，则创建
+                if (!targetDir.exists()) {
+                    targetDir.mkdirs()
+                    }
+                    sourceDir.listFiles()?.filter { it.extension == "jar" }?.forEach {
+                        val targetFile = File(targetDir, it.name)
+                        try {
+                            Files.copy(it.toPath(), targetFile.toPath())
+                            JOptionPane.showMessageDialog(null,"安装成功!")
+                            } catch (e: Exception) {
+                                JOptionPane.showMessageDialog(null,"安装失败：${e.message}");
                                 }
                             }
                         }
- private fun deleteFileRecursively(file: Path) {
+                    })
+                    //按钮2点击操作
+                    button2.addActionListener(object : ActionListener {
+                        override fun actionPerformed(e: ActionEvent?) {
+                            JOptionPane.showMessageDialog(null,"没写完，点了也没用!但是会打开项目的地址,无法访问请挂加速器,无法打开，请下载Edge浏览器.")
+                            JOptionPane.showMessageDialog(null,"当前版本:v1.2")
+                            val edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+                            val url = "https://github.com/XuTiancicn/A-program-written-for-Dalian-No.113-Middle-School"
+                            val processBuilder = ProcessBuilder(edgePath, url)
+                            processBuilder.directory(File("C:\\"))
+                            processBuilder.start()
+                            }
+                        })
+                    }
+                }
+private fun deleteFileRecursively(file: Path) {
     if (Files.isDirectory(file)) {
         Files.list(file).forEach { child ->
-            deleteFileRecursively(child)
+        deleteFileRecursively(child)
         }
     }
-
     try {
         Files.delete(file)
         println("Deleted file: $file")
-    } catch (e: IOException) {
-        println("Failed to delete file: $file")
-        e.printStackTrace()
-    }   
- }
+        } catch (e: IOException) {
+            println("Failed to delete file: $file")
+            e.printStackTrace()
+        }
+    }
 fun restartSystem() {
     val r = Runtime.getRuntime()
     val p = ProcessBuilder("shutdown", "-r", "-t", "0")
     p.start()
-
 }
 
 fun shutdownSystem() {
