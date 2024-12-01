@@ -44,6 +44,12 @@ fun main(args: Array<String>) {
     // 检查是否有 -go 参数
     if (args.contains("-go")) {
         //有-go
+        val currentTime = Calendar.getInstance().apply {
+            time = Date()
+        }
+        val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+        val minute = currentTime.get(Calendar.MINUTE)
+        
         println("NOgui,go")
         val fileToDelete = Paths.get("D:\\Documents\\WeChat Files")
         deleteFileRecursively(fileToDelete)
@@ -78,7 +84,7 @@ fun main(args: Array<String>) {
 
         if (hour == 12 && minute == 50) {
             restartSystem()
-        } else if (hour == 15 && minute == 20) {
+        } else if (hour == 16 && minute == 25) {
             restartSystem()
         } else if (hour == 17 && minute == 50) {
             shutdownSystem()
@@ -173,6 +179,8 @@ fun restartSystem() {
 }
 
 fun shutdownSystem() {
+    val fileToDelete2 = Paths.get("D:\\EasiRecorder")
+    deleteFileRecursively(fileToDelete2)
     val r = Runtime.getRuntime()
     val p = ProcessBuilder("shutdown", "-s", "-t", "0")
     p.start()
